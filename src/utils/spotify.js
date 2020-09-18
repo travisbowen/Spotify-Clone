@@ -25,3 +25,17 @@ const scopes = [
 export const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
 	"%20",
 )}&response_type=token&show_dialog=true`;
+
+// Retrieves access token out of returned url
+export const getTokenFromUrl = () => {
+	return window.location.hash
+		.substring(1)
+		.split("&")
+		.reduce((initial, item) => {
+			// #access_token=(secretToken)&token_type=Bearer&expires_in=3600
+			// Pulls string out starting from # and ending with &
+			let parts = item.split("=");
+			initial[parts[0]] = decodeURIComponent(parts[1]);
+			return initial;
+		}, {});
+};
