@@ -10,8 +10,7 @@ import { useStateValue } from "./utils/StateProvider";
 const spotify = new SpotifyWebApi();
 
 function App() {
-	const [token, setToken] = useState(null);
-	const [{ user }, dispatch] = useStateValue();
+	const [{ user, token, spotifyObj }, dispatch] = useStateValue();
 
 	useEffect(() => {
 		const hash = getTokenFromUrl();
@@ -20,23 +19,28 @@ function App() {
 
 		const _token = hash.access_token;
 		if (_token) {
-			setToken(_token);
+			dispatch({
+				type: "SET_TOKEN",
+				token: _token,
+			});
+
 			// Giving access token to spotify instance
 			spotify.setAccessToken(_token);
 
 			// Retrieves user's account
 			spotify.getMe().then((user) => {
-				console.log(user);
-
 				dispatch({
 					type: "SET_USER",
 					user: user,
 				});
+
+				dispatch({
+					type: "SET_SPOTIFY_OBJ",
+					spotifyObj: spotify,
+				});
 			});
 		}
 	}, []);
-
-	console.log("user", user);
 
 	return <div className='app'>{token ? <Player /> : <Login />}</div>;
 }
