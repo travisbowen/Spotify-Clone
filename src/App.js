@@ -39,6 +39,15 @@ function App() {
 					spotifyObj: spotify,
 				});
 			});
+
+			// Retrieves user's playlist
+			spotify.getUserPlaylists().then((playlists) => {
+				console.log("Playlists -->", playlists);
+				dispatch({
+					type: "SET_PLAYLISTS",
+					playlists: playlists,
+				});
+			});
 		}
 	}, []);
 

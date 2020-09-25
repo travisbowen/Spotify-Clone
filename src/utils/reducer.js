@@ -1,9 +1,7 @@
 // Initial state of the data layer
 export const initialState = {
 	user: null,
-	// Todo Remove after developing
-	token:
-		"BQCszfKKmgMk4omMTtjPakptoa3kbVBjlMuTDGXJEIWruyaJfJU60xV7CHjwBl2AQqGL_IBtk-gTeV5KVuJel3momTPDAE2dUJlTRhk4Gg-LtRiRjwX46DXEayDfD8qohlAcvOmRmidO1PB4Hy539M-les3h",
+	token: "",
 	playlists: [],
 	playing: false,
 	song: null,
@@ -34,6 +32,13 @@ const reducer = (state, action) => {
 				...state,
 				// Update spotify obj
 				spotifyObj: action.spotifyObj,
+			};
+		case "SET_PLAYLISTS":
+			return {
+				// Keeps whats in current state
+				...state,
+				// Update spotify obj
+				playlists: action.playlists,
 			};
 		default:
 			return state;
