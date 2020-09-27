@@ -42,6 +42,13 @@ const reducer = (state, action) => {
 				// Update spotify obj
 				playlists: action.playlists,
 			};
+		case "SET_DISCOVER_WEEKLY":
+			return {
+				// Keeps whats in current state
+				...state,
+				// Update weekly
+				discover_weekly: action.discover_weekly,
+			};
 		default:
 			return state;
 	}

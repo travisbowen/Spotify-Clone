@@ -48,6 +48,14 @@ function App() {
 					playlists: playlists,
 				});
 			});
+
+			// Retrieves user's weekly
+			spotify.getPlaylist("37i9dQZEVXcCnfgJur18k7").then((response) => {
+				dispatch({
+					type: "SET_DISCOVER_WEEKLY",
+					discover_weekly: response,
+				});
+			});
 		}
 	}, []);
 
